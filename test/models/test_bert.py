@@ -22,7 +22,7 @@ def set_equal_weights(mdl, torch_mdl):
   torch_mdl.eval()
 
 class TestBert(unittest.TestCase):
-  @unittest.skipUnless(Device.DEFAULT in ["GPU"])
+  @unittest.skipUnless(Device.DEFAULT in ["GPU"], "comp_intensive")
   def test_questions(self):
     from models.bert import BertForQuestionAnswering
     from transformers import BertForQuestionAnswering as TorchBertForQuestionAnswering
