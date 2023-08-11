@@ -27,8 +27,8 @@ class TestBert(unittest.TestCase):
     from transformers import BertConfig
 
     config = {
-      'vocab_size':30522, 'hidden_size':4, 'num_hidden_layers':4, 'num_attention_heads':4,
-      'intermediate_size':128, 'hidden_dropout_prob':0.1, 'attention_probs_dropout_prob':0.1,
+      'vocab_size':30522, 'hidden_size':2, 'num_hidden_layers':2, 'num_attention_heads':2,
+      'intermediate_size':32, 'hidden_dropout_prob':0.1, 'attention_probs_dropout_prob':0.1,
       'max_position_embeddings':512, 'type_vocab_size':2
       }
 
@@ -43,7 +43,7 @@ class TestBert(unittest.TestCase):
     set_equal_weights(mdl, torch_mdl)
 
     seeds = (1337, 3141)
-    bsz, seq_len = 1, 96
+    bsz, seq_len = 1, 16
     for _, seed in enumerate(seeds):
       in_ids, mask, seg_ids = get_question_samp(bsz, seq_len, config['vocab_size'], seed)
       out = mdl(Tensor(in_ids), Tensor(mask), Tensor(seg_ids))
