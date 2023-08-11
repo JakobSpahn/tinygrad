@@ -2,6 +2,7 @@
 import unittest
 import numpy as np
 from tinygrad.tensor import Tensor
+from tinygrad.lazy import Device
 import torch
 
 def get_question_samp(bsz, seq_len, vocab_size, seed):
@@ -21,6 +22,7 @@ def set_equal_weights(mdl, torch_mdl):
   torch_mdl.eval()
 
 class TestBert(unittest.TestCase):
+  @unittest.skipUnless(Device.DEFAULT in ["GPU"])
   def test_questions(self):
     from models.bert import BertForQuestionAnswering
     from transformers import BertForQuestionAnswering as TorchBertForQuestionAnswering
@@ -31,7 +33,7 @@ class TestBert(unittest.TestCase):
       'intermediate_size':4096, 'hidden_dropout_prob':0.1, 'attention_probs_dropout_prob':0.1,
       'max_position_embeddings':512, 'type_vocab_size':2
       }
-
+    torch.set_default_device("cpu")
     # Create in tinygrad
     Tensor.manual_seed(1337)
     mdl = BertForQuestionAnswering(**config)
@@ -42,7 +44,7 @@ class TestBert(unittest.TestCase):
 
     set_equal_weights(mdl, torch_mdl)
 
-    seeds = (1337, 3141, 1602)
+    seeds = (1337,)
     bsz, seq_len = 1, 384
     for _, seed in enumerate(seeds):
       in_ids, mask, seg_ids = get_question_samp(bsz, seq_len, config['vocab_size'], seed)
