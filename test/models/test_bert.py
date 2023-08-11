@@ -33,7 +33,7 @@ class TestBert(unittest.TestCase):
       'intermediate_size':4096, 'hidden_dropout_prob':0.1, 'attention_probs_dropout_prob':0.1,
       'max_position_embeddings':512, 'type_vocab_size':2
       }
-    torch.set_default_device("cpu")
+    #torch.set_default_device("cpu")
     # Create in tinygrad
     Tensor.manual_seed(1337)
     mdl = BertForQuestionAnswering(**config)
