@@ -27,7 +27,7 @@ class TestBert(unittest.TestCase):
     from transformers import BertConfig
 
     config = {
-      'vocab_size':30522, 'hidden_size':2, 'num_hidden_layers':2, 'num_attention_heads':2,
+      'vocab_size':24, 'hidden_size':2, 'num_hidden_layers':2, 'num_attention_heads':2,
       'intermediate_size':32, 'hidden_dropout_prob':0.1, 'attention_probs_dropout_prob':0.1,
       'max_position_embeddings':512, 'type_vocab_size':2
       }
