@@ -665,7 +665,7 @@ jobs:
         run: |
           git clone --recurse-submodules https://github.com/JakobSpahn/gpuocelot.git ${{ github.workspace }}/gpuocelot
           cd ${{ github.workspace }}/gpuocelot
-          git checkout 183586142fde84eeb62572eb8acfb2a028932ebe
+          git checkout 183586142fde84eeb62572eb8acfb2a028932ebe && git submodule update --recursive --init
           cd ocelot && mkdir build && cd build
           cmake .. -Wno-dev -G Ninja -DBUILD_TOOLS=OFF -DCMAKE_BUILD_ALWAYS=0 -DBUILD_TESTS_CUDA=OFF
           ninja
