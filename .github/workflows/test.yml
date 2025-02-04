@@ -650,7 +650,7 @@ jobs:
         if: matrix.backend == 'ptx'
         run: |
           brew update
-          brew install cmake ninja llvm@15 zlib glew flex bison boost zstd ncurses
+          brew install cmake ninja llvm@15 zlib glew flex bison boost zstd ncurses nasm
       - name: Cache gpuocelot
         if: matrix.backend == 'ptx'
         id: cache-build
