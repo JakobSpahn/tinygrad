@@ -496,15 +496,14 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-22.04]
-        backend:
-        - [llvm, clang, gpu, nv, ptx, amd] #, triton]
+        backend: [llvm, clang, gpu, nv, ptx, amd] #, triton]
         include:
           - os: macos-15
             backend: ptx
           # - os: macos15
           #   backend: amd
 
-    name: Tests on (${{ matrix.backend }})
+    name: Tests on (${{ matrix.backend }}, ${{matrix.os}})
     runs-on: ${{ matrix.os }}
     timeout-minutes: 20
 
