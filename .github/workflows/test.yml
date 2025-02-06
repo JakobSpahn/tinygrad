@@ -633,12 +633,9 @@ jobs:
       - name: Run TRANSCENDENTAL math
         if: startsWith(matrix.os, 'ubuntu-')
         run: TRANSCENDENTAL=2 python -m pytest -n=auto test/test_ops.py::TestOps::test_sin test/test_ops.py::TestOps::test_cos test/test_ops.py::TestOps::test_tan test/test_ops.py::TestOps::test_exp test/test_ops.py::TestOps::test_log --durations=20
-      - name: Run pytest (amd, macos)
-        if: startsWith(matrix.os, 'macos-') && matrix.backend=='amd'
-        run: python -m pytest -n=auto test/test_hcq.py test/test_tiny.py --durations=20
-      - name: Run pytest (ptx, macos)
-        if: startsWith(matrix.os, 'macos-') && matrix.backend=='ptx'
-        run: python -m pytest -n=1 test/test_hcq.py test/test_tiny.py --durations=20
+      - name: Run pytest (${{matrix.backend}}, macos)
+        if: startsWith(matrix.os, 'macos-') && (matrix.backend=='amd' || matrix.backend=='ptx')
+        run: python -m pytest -n=${{ matrix.backend=='ptx' && '1' || 'auto'}} test/test_hcq.py test/test_tiny.py --durations=20
       - name: Run process replay tests
         if: startsWith(matrix.os, 'ubuntu-')
         run: |
