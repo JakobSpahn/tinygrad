@@ -637,7 +637,6 @@ jobs:
         if: startsWith(matrix.os, 'macos-') && (matrix.backend=='amd' || matrix.backend=='ptx')
         run: python -m pytest -n=${{ matrix.backend=='ptx' && '1' || 'auto'}} test/test_hcq.py test/test_tiny.py --durations=20
       - name: Run process replay tests
-        if: startsWith(matrix.os, 'ubuntu-')
         run: |
           export PR_TITLE=$(jq -r .pull_request.title "$GITHUB_EVENT_PATH")
           export COMMIT_MESSAGE=$(git show -s --format=%B ${{ github.event.pull_request.head.sha }})
