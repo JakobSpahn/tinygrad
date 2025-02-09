@@ -547,13 +547,13 @@ jobs:
           cache-name: cache-gpuocelot-build
         with:
           path: ${{ github.workspace }}/gpuocelot/ocelot
-          key: ubuntu22.04-gpuocelot-4eeca09c4f9c450ed0d6210dd93b9c2ae6f101b1-rebuild-9
+          key: ubuntu22.04-gpuocelot-b16039dc940dc6bc4ea0a98380495769ff35ed99-rebuild-9
       - name: Clone/compile gpuocelot
         if: (matrix.backend == 'ptx' || matrix.backend == 'triton' || matrix.backend == 'nv') && steps.cache-build.outputs.cache-hit != 'true'
         run: |
           git clone --recurse-submodules https://github.com/gpuocelot/gpuocelot.git ${{ github.workspace }}/gpuocelot
           cd ${{ github.workspace }}/gpuocelot/ocelot
-          git checkout 4eeca09c4f9c450ed0d6210dd93b9c2ae6f101b1 && git submodule update --recursive --init
+          git checkout b16039dc940dc6bc4ea0a98380495769ff35ed99
           mkdir build
           cd build
           cmake .. -Wno-dev -G Ninja -DOCELOT_BUILD_TOOLS=OFF -DCMAKE_BUILD_ALWAYS=0 -DBUILD_TESTS_CUDA=OFF
@@ -654,13 +654,13 @@ jobs:
           cache-name: cache-gpuocelot-osx-build
         with:
           path: ${{ github.workspace }}/gpuocelot/ocelot
-          key: macos-15-gpuocelot-183586142fde84eeb62572eb8acfb2a028932ebe-rebuild-9
+          key: macos-15-gpuocelot-b16039dc940dc6bc4ea0a98380495769ff35ed99-rebuild-9
       - name: Clone/compile gpuocelot
         if: steps.cache-build.outputs.cache-hit != 'true'
         run: |
           git clone --recurse-submodules https://github.com/gpuocelot/gpuocelot.git ${{ github.workspace }}/gpuocelot
           cd ${{ github.workspace }}/gpuocelot
-          git checkout 4eeca09c4f9c450ed0d6210dd93b9c2ae6f101b1
+          git checkout b16039dc940dc6bc4ea0a98380495769ff35ed99
           cd ocelot && mkdir build && cd build
           cmake .. -Wno-dev -G Ninja -DBUILD_TOOLS=OFF -DCMAKE_BUILD_ALWAYS=0 -DBUILD_TESTS_CUDA=OFF
           ninja
